@@ -15,7 +15,7 @@ end)
 
 hs.hotkey.bind({"ctrl"}, "T", function()
 
-    hs.applescript([[try
+    ok,result = hs.applescript([[try
   tell application "Finder" to set the this_folder ¬
    to (folder of the front window) as alias
 on error -- no open folder windows
@@ -25,8 +25,9 @@ end try
 set thefilename to text returned of (display dialog ¬
  "Create file named:" default answer "filename.txt")
 set thefullpath to POSIX path of this_folder & thefilename
-do shell script "touch \"" & thefullpath & "\""]])
-
+do shell script "touch \"" & thefullpath & "\" & /usr/local/bin/subl \"" & thefullpath & "\" "
+return thefullpath
+]])
 
 end)
 
